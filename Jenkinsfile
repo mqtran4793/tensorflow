@@ -2,7 +2,7 @@ pipeline {
    agent any
    
    environment {
-      registry = "mqtran4793"
+      registry = "docker.io/mqtran4793"
       registryCredential = 'dockerhub'
    }   
 
