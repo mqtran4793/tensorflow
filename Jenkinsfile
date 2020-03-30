@@ -14,7 +14,7 @@ pipeline {
    stages {
       stage('Build debian-base') {
          steps {
-            sh './build.sh debian-base/ ${REGISTRY}'
+            sh './build.sh debian-base ${REGISTRY}'
          }
       }
    }
