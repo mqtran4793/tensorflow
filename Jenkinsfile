@@ -1,7 +1,7 @@
 pipeline {
    environment {
       registry = "mqtran4793"
-      registryCredential = ‘dockerhub’
+      registryCredential = 'dockerHub'
       // REGISTRY = "mqtran4793"
       // REGISTRY_CREDS = "$HOME/.docker/config.json"
       // DOCKER_CONFIG="$HOME/.docker"
