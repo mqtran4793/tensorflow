@@ -1,5 +1,5 @@
 pipeline {
-   agent none
+   agent any
 
    options {
       timeout (time: 3, unit: 'HOURS')
@@ -8,7 +8,6 @@ pipeline {
 
    stages {
       stage('Build debian-base') {
-         agent { label 'docker' }
          steps {
             sh './build.sh'
          }
