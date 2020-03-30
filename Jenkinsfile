@@ -2,8 +2,8 @@ pipeline {
    agent any
    
    environment {
-      DOCKER="mqtran4793"
-      DOCKER_CREDS = 'dockerhub'
+      REGISTRY="mqtran4793"
+      REGISTRY_CREDS = 'dockerhub'
    }   
 
    options {
@@ -14,7 +14,7 @@ pipeline {
    stages {
       stage('Build debian-base') {
          steps {
-            sh './build.sh debian-base ${BRANCH_NAME} ${REGISTRY}'
+            sh './build.sh debian-base debian-base ${REGISTRY}'
          }
       }
    }
