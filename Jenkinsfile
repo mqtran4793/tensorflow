@@ -4,7 +4,7 @@ pipeline {
       //registryCredential = ‘dockerhub’
       REGISTRY = "docker.io/mqtran4793"
       REGISTRY_CREDS = "$HOME/.docker/config.json"
-      //DOCKER_CONFIG="$HOME/.docker"
+      DOCKER_CONFIG="$HOME/.docker"
    }
 
    agent any
