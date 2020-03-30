@@ -12,15 +12,15 @@ pipeline {
 
    stages {
       stage('Building image') {
-         steps{
+         steps {
+            cd debian-base/
             script {
-               cd debian-base/
                dockerImage = docker.build registry + "/debian-base:$BUILD_NUMBER"
             }
          }
       }
       stage('Deploy image') {
-         steps{
+         steps {
             script {
                docker.withRegistry( '', registryCredential ) {
                   dockerImage.push()
