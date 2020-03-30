@@ -7,7 +7,6 @@ export REGISTRY=$2 # The Docker Registry to use
 export REGISTRY_USERNAME=$3 # The username for the Docker Registry
 export REGISTRY_PASSWORD=$4 # The password for the Docker Registry
 
-groupadd docker
 usermod -aG docker ${USER}
 newgrp docker
 cd debian-base/
