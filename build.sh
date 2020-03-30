@@ -8,6 +8,7 @@ export REGISTRY=$3 # The Docker Registry to use
 export REGISTRY_USERNAME=$4 # The username for the Docker Registry
 export REGISTRY_PASSWORD=$5 # The password for the Docker Registry
 
+cd $IMAGE_NAME
 echo ${REGISTRY_PASSWORD} | docker login --username ${REGISTRY_USERNAME} --password-stdin
 docker build -t ${REGISTRY}/${IMAGE_NAME}:${BRANCH_NAME} .
 docker push ${REGISTRY}/${IMAGE_NAME}:${BRANCH_NAME}
