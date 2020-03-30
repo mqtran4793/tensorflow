@@ -10,7 +10,7 @@ pipeline {
       stage('Build debian-base') {
          agent { label 'docker' }
          steps {
-            sh './build.sh
+            sh './build.sh'
          }
       }
    }
