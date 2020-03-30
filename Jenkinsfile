@@ -4,7 +4,6 @@ pipeline {
    environment {
       REGISTRY="mqtran4793/test"
       REGISTRY_CREDS = 'dockerhub'
-      DOCKER_CONFIG="${HOME}/.docker"
    }   
 
    options {

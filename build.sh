@@ -3,13 +3,13 @@
 set -e
 
 export IMAGE_NAME=$1 # The full docker image name (without tag)
-export REGISTRY=$2 # The Docker Registry to use
-export REGISTRY_USERNAME=$3 # The username for the Docker Registry
-export REGISTRY_PASSWORD=$4 # The password for the Docker Registry
+export DOCKER=$2 # The Docker Registry to use
+export DOCKER_USER=$3 # The username for the Docker Registry
+export DOCKER_PASSWORD=$4 # The password for the Docker Registry
 
 cd debian-base/
 
-echo ${REGISTRY_PASSWORD} | docker login --username ${REGISTRY_USERNAME} --password-stdin ${REGISTRY}
+echo ${DOCKER_PASSWORD} | docker login --username ${DOCKER_USER} --password-stdin ${REGISTRY}
 docker build --build-arg DOCKER_USERNAME=${REGISTRY_USERNAME} --build-arg DOCKER_PASSWORD=${REGISTRY_PASSWORD} -t ${REGISTRY}/${IMAGE_NAME} .
 docker push ${REGISTRY}/${IMAGE_NAME}
 
