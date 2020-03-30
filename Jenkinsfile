@@ -2,8 +2,8 @@ pipeline {
    agent any
    
    environment {
-      REGISTRY="mqtran4793/test"
-      REGISTRY_CREDS = 'dockerhub'
+      DOCKER="mqtran4793/test"
+      DOCKER_CREDS = 'dockerhub'
    }   
 
    options {
