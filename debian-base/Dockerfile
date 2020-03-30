@@ -14,5 +14,6 @@ RUN tar -xzvf tensorflow-gpu.tar.gz \
 && tensorflow-gpu/install_tensorflow-gpu_prerequisites.sh \
 && tensorflow-gpu/install_tensorflow-gpu.sh
 
-RUN apt-get clean \
+RUN rm -r tensorflow-gpu.tar.gz \
+&& apt-get clean \
 && rm -rf /var/lib/apt/lists/*
