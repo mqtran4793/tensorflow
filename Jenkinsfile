@@ -15,7 +15,7 @@ pipeline {
          steps{
             script {
                cd debian-base/
-               dockerImage = docker.build registry + "debian-base:$BUILD_NUMBER"
+               dockerImage = docker.build registry + "/debian-base:$BUILD_NUMBER"
             }
          }
       }
