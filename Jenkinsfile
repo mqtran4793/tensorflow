@@ -3,7 +3,7 @@ pipeline {
 
    environment {
       REGISTRY = "mqtran4793"
-      REGISTRY_CREDS = credentials('b318c682-2a99-48d9-a497-71b540466c48')
+      REGISTRY_CREDS = registryCredentials('dockerhub')
       // DOCKER_CONFIG="$WORKSPACE/.docker"
    }
 
