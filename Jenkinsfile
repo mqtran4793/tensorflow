@@ -2,7 +2,7 @@ pipeline {
    agent any
 
    environment {
-      REGISTRY="mqtran4793"
+      REGISTRY="docker.io/mqtran4793"
       REGISTRY_CREDS = credentials('dockerhub')
       // DOCKER_CONFIG="$WORKSPACE/.docker"
    }
