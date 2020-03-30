@@ -1,20 +1,17 @@
 pipeline {
-   agent any
-   
    environment {
-      registry = "docker.io/mqtran4793"
-      registryCredential = 'dockerhub'
-   }   
-
-   options {
-      timeout (time: 3, unit: 'HOURS')
-      buildDiscarder (logRotator (numToKeepStr: '1'))
+      //registry = "mqtran4793/repository_name"
+      //registryCredential = ‘dockerhub’
+      REGISTRY = "mqtran4793"
+      DOCKER_CONFIG="$HOME/.docker"
    }
+
+   agent any
 
    stages {
       stage('Build debian-base') {
          steps {
-            sh './build.sh debian-base 0.1 ${registry}'
+            sh './build.sh debian-base 0.1 ${REGISTRY} '
          }
       }
    }
