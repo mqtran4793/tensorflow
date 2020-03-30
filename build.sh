@@ -7,8 +7,6 @@ export REGISTRY=$2 # The Docker Registry to use
 export REGISTRY_USERNAME=$3 # The username for the Docker Registry
 export REGISTRY_PASSWORD=$4 # The password for the Docker Registry
 
-usermod -aG docker ${USER}
-newgrp docker
 cd debian-base/
 #echo ${REGISTRY_PASSWORD} | docker login --username DOCKER_USERNAME=${REGISTRY_USERNAME} --password-stdin
 docker login -u DOCKER_USERNAME=${REGISTRY_USERNAME} -p DOCKER_PASSWORD=${REGISTRY_PASSWORD}
