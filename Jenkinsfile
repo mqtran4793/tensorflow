@@ -5,7 +5,7 @@ pipeline {
       // REGISTRY = "mqtran4793"
       // REGISTRY_CREDS = "$HOME/.docker/config.json"
       // DOCKER_CONFIG="$HOME/.docker"
-      dockerImage = ' '
+      dockerImage = ''
    }
 
    agent any
