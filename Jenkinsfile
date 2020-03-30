@@ -1,31 +1,16 @@
 pipeline {
    environment {
-      registry = "mqtran4793"
-      registryCredential = 'dockerHub'
-      // REGISTRY = "mqtran4793"
-      // REGISTRY_CREDS = "$HOME/.docker/config.json"
-      // DOCKER_CONFIG="$HOME/.docker"
-      dockerImage = ''
+      REGISTRY = "mqtran4793"
+      REGISTRY_CREDS = credentials('b318c682-2a99-48d9-a497-71b540466c48')
+      DOCKER_CONFIG="$WORKSPACE/.docker"
    }
 
    agent any
 
    stages {
-      stage('Building image') {
+      stage('Build debian-base') {
          steps {
-            cd debian-base/
-            script {
-               dockerImage = docker.build registry + "/debian-base:$BUILD_NUMBER"
-            }
-         }
-      }
-      stage('Deploy image') {
-         steps {
-            script {
-               docker.withRegistry( '', registryCredential ) {
-                  dockerImage.push()
-               }
-            }
+            sh './build.sh debian-base 0.1 ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
          }
       }
    }
