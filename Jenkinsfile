@@ -4,7 +4,6 @@ pipeline {
    environment {
       REGISTRY="mqtran4793"
       REGISTRY_CREDS = credentials('dockerhub')
-      // DOCKER_CONFIG="$WORKSPACE/.docker"
    }
 
    stages {
