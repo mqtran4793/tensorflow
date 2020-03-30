@@ -9,7 +9,7 @@ export REGISTRY_USERNAME=$4 # The username for the Docker Registry
 export REGISTRY_PASSWORD=$5 # The password for the Docker Registry
 
 cd debian-base/
-#echo ${REGISTRY_PASSWORD} | docker login --username DOCKER_USERNAME=${REGISTRY_USERNAME} --password-stdin ${REGISTRY}
+echo ${REGISTRY_PASSWORD} | docker login --username DOCKER_USERNAME=${REGISTRY_USERNAME} --password-stdin ${REGISTRY}
 #docker login docker.io
 #docker build --build-arg DOCKER_USERNAME=${REGISTRY_USERNAME} --build-arg DOCKER_PASSWORD=${REGISTRY_PASSWORD} -t ${REGISTRY}/${IMAGE_NAME} .
 docker build -t ${REGISTRY}/${IMAGE_NAME}:${BRANCH_NAME} .
