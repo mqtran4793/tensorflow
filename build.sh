@@ -10,7 +10,7 @@ export REGISTRY=$3 # The Docker Registry to use
 
 cd debian-base/
 #echo ${REGISTRY_PASSWORD} | docker login --username DOCKER_USERNAME=${REGISTRY_USERNAME} --password-stdin
-#docker login -u DOCKER_USERNAME=${REGISTRY_USERNAME} -p DOCKER_PASSWORD=${REGISTRY_PASSWORD}
+#docker login -u DOCKER_USERNAME=${REGISTRY_USERNAME} -p DOCKER_PASSWORD=${REGISTRY_PASSWORD} docker.io
 #docker build --build-arg DOCKER_USERNAME=${REGISTRY_USERNAME} --build-arg DOCKER_PASSWORD=${REGISTRY_PASSWORD} -t ${REGISTRY}/${IMAGE_NAME} .
 docker build -t ${REGISTRY}/${IMAGE_NAME}:${BRANCH_NAME} .
 docker push ${REGISTRY}/${IMAGE_NAME}:${BRANCH_NAME}
