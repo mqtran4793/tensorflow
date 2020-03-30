@@ -2,8 +2,8 @@
 
 set -e
 
-ROOT="$HOME/Desktop/Docker/"
+#ROOT="$HOME/Desktop/Docker/"
 
-cd $ROOT/debian-base/
+#cd $ROOT/debian-base/
 docker build -t mqtran4793/test:debian-base .
 docker push mqtran4793/test:debian-base
