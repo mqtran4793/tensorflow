@@ -58,8 +58,8 @@ RUN HOST_NSYNC_LIB=`tensorflow/contrib/makefile/compile_nsync.sh` && \
     export HOST_NSYNC_LIB TARGET_NSYNC_LIB
 
 RUN ./tensorflow/contrib/makefile/compile_linux_protobuf.sh
-RUN apt-get install -y python3-dev python3-numpy python3-pip python3-wheel
-RUN python --version
+RUN apt-get install -y python3 python3-dev python3-numpy python3-pip python3-wheel
 RUN python3 --version
+RUN python --version
 RUN export PATH="$PATH:$HOME/bin" && \
     bazel build --config=opt --config=monolithic --verbose_failures //tensorflow:libtensorflow_cc.so
