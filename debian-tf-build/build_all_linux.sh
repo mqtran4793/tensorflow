@@ -21,11 +21,7 @@ set -e
 # Make sure we're in the correct directory, at the root of the source tree.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd ${SCRIPT_DIR}/../../../
-echo
-echo $HOME
-ls $HOME/bin
-echo
-source "${SCRIPT_DIR}/build_helper.subr"
+#source "${SCRIPT_DIR}/build_helper.subr"
 JOB_COUNT="${JOB_COUNT:-$(get_job_count)}"
 
 # Remove any old files first.
