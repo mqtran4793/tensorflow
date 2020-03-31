@@ -47,7 +47,7 @@ CMD source ~/.bashrc
 RUN git clone https://github.com/tensorflow/tensorflow.git && \
     cd tensorflow && git checkout r1.14
 
-COPY .tf_configure.bazelrc /tensorflow_build && \
+COPY .tf_configure.bazelrc / && \
     build_all_linux.sh tensorflow/contrib/makefile/
 
 RUN ./tensorflow/contrib/makefile/build_all_linux.sh
