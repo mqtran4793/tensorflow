@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done
 
 RUN apt-get update -y && \
-    apt-get install --no-install-recommends -y build-essential curl wget dirmngr \
+    apt-get install -y build-essential curl wget dirmngr \
     git gcc g++ gcc-multilib g++-multilib autoconf autogen automake libtool \
     mlocate cmake make pkg-config zlib1g-dev && \
     updatedb
