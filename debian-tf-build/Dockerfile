@@ -53,12 +53,10 @@ COPY .tf_configure.bazelrc /tensorflow_build/tensorflow
 RUN rm -rf tensorflow/contrib/makefile/downloads && \
     ./tensorflow/contrib/makefile/download_dependencies.sh
 
-ENV HOST_NSYNC_LIB=`tensorflow/contrib/makefile/compile_nsync.sh`
-
-ENV TARGET_NSYNC_LIB="$HOST_NSYNC_LIB"
-
-RUN export HOST_NSYNC_LIB TARGET_NSYNC_LIB
+RUN HOST_NSYNC_LIB=`tensorflow/contrib/makefile/compile_nsync.sh` && \
+    TARGET_NSYNC_LIB="$HOST_NSYNC_LIB" && \
+    export HOST_NSYNC_LIB TARGET_NSYNC_LIB
 
 RUN ./tensorflow/contrib/makefile/compile_linux_protobuf.sh
-RUN echo $PATH
-RUN bazel build --config=opt --config=cuda --config=monolithic --verbose_failures //tensorflow:libtensorflow_cc.so
+RUN export PATH="$PATH:$HOME/bin" && \
+    bazel build --config=opt --config=cuda --config=monolithic --verbose_failures //tensorflow:libtensorflow_cc.so
