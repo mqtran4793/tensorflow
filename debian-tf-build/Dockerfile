@@ -58,9 +58,7 @@ RUN HOST_NSYNC_LIB=`tensorflow/contrib/makefile/compile_nsync.sh` && \
     export HOST_NSYNC_LIB TARGET_NSYNC_LIB
 
 RUN ./tensorflow/contrib/makefile/compile_linux_protobuf.sh
-RUN echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
-RUN cat ~/.bashrc
-RUN echo $PATH
-RUN bazel version
-RUN bash configure && \
+RUN export PATH="$PATH:$HOME/bin" && \
+    chmod +x configure && \
+    bash configure && \
     bazel build --config=opt --config=monolithic --verbose_failures //tensorflow:libtensorflow_cc.so
