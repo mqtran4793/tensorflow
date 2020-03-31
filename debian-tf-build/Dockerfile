@@ -17,7 +17,7 @@ RUN tar -xzvf tensorflow-gpu.tar.gz
 
 RUN apt-get install --no-install-recommends -y build-essential wget dirmngr && \
     curl git gcc g++ gcc-multilib g++-multilib autoconf autogen automake libtool && \
-    mlocate cmake make pkg-config zlib1g-dev
+    mlocate cmake make pkg-config zlib1g-dev && \
     updatedb
 
 RUN rm /usr/bin/python && \
