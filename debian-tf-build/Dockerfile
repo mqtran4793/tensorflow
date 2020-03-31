@@ -40,8 +40,9 @@ COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
 
 RUN chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \
     ./bazel-0.24.1-installer-linux-x86_64.sh --user && \
-    echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc && \
-    source ~/.bashrc
+    echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
+    
+CMD source ~/.bashrc
 
 RUN git clone https://github.com/tensorflow/tensorflow.git && \
     cd tensorflow && git checkout r1.14
