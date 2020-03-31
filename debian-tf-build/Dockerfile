@@ -40,9 +40,7 @@ COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
 
 RUN chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \
     ./bazel-0.24.1-installer-linux-x86_64.sh --user && \
-    echo 'export PATH="$PATH:$HOME/bin"' >> ~/.bashrc
-    
-CMD source ~/.bashrc
+    export PATH="$PATH:$HOME/bin"
 
 RUN git clone https://github.com/tensorflow/tensorflow.git
 
@@ -52,20 +50,15 @@ RUN git checkout r1.14
 
 COPY .tf_configure.bazelrc /tensorflow_build/tensorflow
 
-RUN cat .tf_configure.bazelrc
-
-RUN rm -rf tensorflow/contrib/makefile/downloads
-
-RUN ./tensorflow/contrib/makefile/download_dependencies.sh
+RUN rm -rf tensorflow/contrib/makefile/downloads && \
+    ./tensorflow/contrib/makefile/download_dependencies.sh
 
 ENV HOST_NSYNC_LIB=`tensorflow/contrib/makefile/compile_nsync.sh`
+
 ENV TARGET_NSYNC_LIB="$HOST_NSYNC_LIB"
+
 RUN export HOST_NSYNC_LIB TARGET_NSYNC_LIB
 
 RUN ./tensorflow/contrib/makefile/compile_linux_protobuf.sh
-
-#COPY build_all_linux.sh tensorflow/contrib/makefile/
-
-#RUN ./tensorflow/contrib/makefile/build_all_linux.sh
 
 RUN bazel build --config=opt --config=cuda --config=monolithic --verbose_failures //tensorflow:libtensorflow_cc.so
