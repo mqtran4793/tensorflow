@@ -20,7 +20,7 @@ set -e
 
 # Make sure we're in the correct directory, at the root of the source tree.
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd ${SCRIPT_DIR}/../../../
+cd ${SCRIPT_DIR}/../../
 echo
 pwd
 echo
