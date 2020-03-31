@@ -63,4 +63,4 @@ RUN apt-get update -y && \
 RUN python3 --version
 RUN python --version
 RUN export PATH="$PATH:$HOME/bin" && \
-    bazel build --config=opt --config=monolithic --jobs 8 --local_resources 10240,6,1.0 --verbose_failures //tensorflow:libtensorflow_cc.so
+    bazel build --config=opt --config=monolithic --jobs 6 --local_resources 8192,6,1.0 --verbose_failures //tensorflow:libtensorflow_cc.so
