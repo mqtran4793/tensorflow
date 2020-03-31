@@ -49,9 +49,19 @@ RUN git clone https://github.com/tensorflow/tensorflow.git && \
 
 COPY .tf_configure.bazelrc /
 
-COPY build_all_linux.sh tensorflow/contrib/makefile/
+RUN rm -rf tensorflow/contrib/makefile/downloads
 
-RUN ./tensorflow/contrib/makefile/build_all_linux.sh
+RUN ./tensorflow/contrib/makefile/download_dependencies.sh
+
+ENV HOST_NSYNC_LIB=`tensorflow/contrib/makefile/compile_nsync.sh`
+ENV TARGET_NSYNC_LIB="$HOST_NSYNC_LIB"
+RUN export HOST_NSYNC_LIB TARGET_NSYNC_LIB
+
+RUN ./tensorflow/contrib/makefile/compile_linux_protobuf.sh
+
+#COPY build_all_linux.sh tensorflow/contrib/makefile/
+
+#RUN ./tensorflow/contrib/makefile/build_all_linux.sh
 
 RUN cd tensorflow && \
     bazel build --config=opt --config=cuda --config=monolithic --verbose_failures //tensorflow:libtensorflow_cc.so
