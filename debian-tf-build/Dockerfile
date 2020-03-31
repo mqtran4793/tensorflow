@@ -9,8 +9,8 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done
 #COPY tensorflow-gpu.tar.gz /
 
 RUN apt-get update -y && \
-    apt-get install -y build-essential wget curl dirmngr && \
-    git gcc g++ gcc-multilib g++-multilib autoconf autogen automake libtool && \
+    apt-get install -y build-essential wget curl dirmngr \
+    git gcc g++ gcc-multilib g++-multilib autoconf autogen automake libtool \
     mlocate cmake make pkg-config zlib1g-dev && \
     updatedb
 
