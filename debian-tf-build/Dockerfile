@@ -44,10 +44,15 @@ RUN chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \
     
 CMD source ~/.bashrc
 
-RUN git clone https://github.com/tensorflow/tensorflow.git && \
-    cd tensorflow && git checkout r1.14
+RUN git clone https://github.com/tensorflow/tensorflow.git
 
-COPY .tf_configure.bazelrc /
+WORKDIR /tensorflow_build/tensorflow
+
+RUN git checkout r1.14
+
+COPY .tf_configure.bazelrc /tensorflow_build/tensorflow
+
+RUN cat .tf_configure.bazelrc
 
 RUN rm -rf tensorflow/contrib/makefile/downloads
 
@@ -63,5 +68,4 @@ RUN ./tensorflow/contrib/makefile/compile_linux_protobuf.sh
 
 #RUN ./tensorflow/contrib/makefile/build_all_linux.sh
 
-RUN cd tensorflow && \
-    bazel build --config=opt --config=cuda --config=monolithic --verbose_failures //tensorflow:libtensorflow_cc.so
+RUN bazel build --config=opt --config=cuda --config=monolithic --verbose_failures //tensorflow:libtensorflow_cc.so
