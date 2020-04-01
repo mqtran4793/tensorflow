@@ -13,7 +13,6 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     mlocate cmake make zip unzip \
     python3 python3-dev && \
     updatedb && \
-    rm -rf /var/lib/apt/lists/* && \
     ln -s /usr/bin/python3.5 /usr/bin/python
 
 RUN apt-get install -y wget && \
@@ -43,7 +42,8 @@ RUN apt-get install -y curl && \
     ./bazel-0.24.1-installer-linux-x86_64.sh --user && \
     git clone https://github.com/tensorflow/tensorflow.git && \
     apt-get purge -y curl && \
-    rm -rf bazel-0.24.1-installer-linux-x86_64.sh
+    rm -rf bazel-0.24.1-installer-linux-x86_64.sh && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tensorflow
 
