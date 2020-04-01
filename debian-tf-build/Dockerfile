@@ -5,4 +5,4 @@ WORKDIR /tensorflow_build/tensorflow
 COPY .tf_configure.bazelrc /tensorflow_build/tensorflow
 
 RUN export PATH="$PATH:$HOME/bin" && \
-    bazel build --config=opt --config=cuda --config=monolithic --verbose_failures //tensorflow:libtensorflow_cc.so
+    bazel build --config=opt --config=cuda --config=monolithic --job=6 --verbose_failures //tensorflow:libtensorflow_cc.so
