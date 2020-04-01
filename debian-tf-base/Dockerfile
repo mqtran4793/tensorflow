@@ -37,6 +37,7 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
 
 COPY bazel-0.24.1-installer-linux-x86_64.sh /
 
+RUN pwd && ls
 RUN apt-get install -y curl && \
     chmod +x bazel-0.24.1-installer-linux-x86_64.sh
 
