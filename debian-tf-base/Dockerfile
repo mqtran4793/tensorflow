@@ -11,7 +11,7 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done
 RUN apt-get update -y && \
     apt-get install -y build-essential curl wget dirmngr \
     git gcc g++ gcc-multilib g++-multilib autoconf autogen automake libtool \
-    mlocate cmake make zip unzip pkg-config zlib1g-dev && \
+    mlocate cmake make zip unzip pkg-config zlib1g-dev \
     python3 python3-dev python3-numpy python3-pip python3-wheel && \
     updatedb
 
