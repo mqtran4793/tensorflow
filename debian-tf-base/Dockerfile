@@ -13,9 +13,8 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     mlocate cmake make zip unzip \
     python3 python3-dev && \
     updatedb && \
-    ln -s /usr/bin/python3.5 /usr/bin/python
-
-RUN apt-get install -y wget && \
+    ln -s /usr/bin/python3.5 /usr/bin/python && \
+    apt-get install -y wget && \
     wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub && \
     dpkg -i cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
@@ -32,6 +31,7 @@ RUN apt-get install -y wget && \
     dpkg -i libnvinfer-dev_6.0.1-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer-plugin6_6.0.1-1+cuda10.0_amd64.deb && \
     apt-get purge -y wget && \
+    rm -rf /var/lib/apt/lists/* && \
     rm -rf cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     rm -rf lib*
 
@@ -42,8 +42,7 @@ RUN apt-get install -y curl && \
     ./bazel-0.24.1-installer-linux-x86_64.sh --user && \
     git clone https://github.com/tensorflow/tensorflow.git && \
     apt-get purge -y curl && \
-    rm -rf bazel-0.24.1-installer-linux-x86_64.sh && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf bazel-0.24.1-installer-linux-x86_64.sh
 
 WORKDIR /tensorflow
 
