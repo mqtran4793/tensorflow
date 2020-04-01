@@ -7,15 +7,15 @@ pipeline {
    }
 
    stages {
-      // stage('Build debian-base') {
-      //    steps {
-      //       sh './build.sh debian-base 0.1 ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
-      //    }
-      // }
-      stage('Build debian-tf-build') {
+      stage('Build debian-tf-base') {
          steps {
-            sh './build.sh debian-tf-build 0.1 ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
+            sh './build.sh debian-base 0.1 ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
          }
       }
+      // stage('Build debian-tf-build') {
+      //    steps {
+      //       sh './build.sh debian-tf-build 0.1 ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
+      //    }
+      // }
    }
 }
