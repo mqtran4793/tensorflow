@@ -2,7 +2,7 @@ FROM debian:stretch-slim
 
 #RUN mkdir tensorflow_build
 
-#WORKDIR /tensorflow_build
+WORKDIR /
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -35,13 +35,11 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     rm -rf cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     rm -rf lib*
 
-RUN echo $PATH
 COPY bazel-0.24.1-installer-linux-x86_64.sh /
 
 RUN apt-get install -y curl && \
-    chmod +x bazel-0.24.1-installer-linux-x86_64.sh
-
-RUN ./bazel-0.24.1-installer-linux-x86_64.sh --user && \
+    chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \
+    ./bazel-0.24.1-installer-linux-x86_64.sh --user && \
     git clone https://github.com/tensorflow/tensorflow.git && \
     apt-get purge -y curl && \
     rm -rf bazel-0.24.1-installer-linux-x86_64.sh
