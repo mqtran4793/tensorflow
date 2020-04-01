@@ -63,4 +63,4 @@ RUN rm -rf /var/lib/apt/lists/* && \
     rm -rf /tensorflow_build/cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     rm -rf /tensorflow_build/lib* && \
     rm -rf /tensorflow_build/bazel-0.24.1-installer-linux-x86_64.sh && \
-    apt-get purge wget
+    apt-get purge -y wget
