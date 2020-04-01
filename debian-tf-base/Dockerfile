@@ -35,6 +35,7 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     rm -rf cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     rm -rf lib*
 
+WORKDIR /
 RUN pwd && ls
 COPY bazel-0.24.1-installer-linux-x86_64.sh /
 
