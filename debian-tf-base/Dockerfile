@@ -72,7 +72,7 @@ COPY --from=builder tensorflow_build/tensorflow/tensorflow/cc /tensorflow_lib/cc
 COPY --from=builder tensorflow_build/tensorflow/tensorflow/core /tensorflow_lib/core
 COPY --from=builder tensorflow_build/tensorflow/bazel-genfiles /tensorflow_lib/bazel-genfiles
 COPY --from=builder tensorflow_build/tensorflow/third_party /tensorflow_lib/third_party
-COPY --from=builder tensorflow_build/tensorflow/tensorflow/contrib/makefile/download /tensorflow_lib/download
+COPY --from=builder tensorflow_build/tensorflow/tensorflow/contrib/makefile/downloads /tensorflow_lib/downloads
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow* /tensorflow_lib
 #COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
 
