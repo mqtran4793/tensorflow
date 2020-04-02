@@ -31,14 +31,13 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     dpkg -i libnvinfer-dev_6.0.1-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer-plugin6_6.0.1-1+cuda10.0_amd64.deb && \
     apt-get purge -y wget && \
-    rm -rf /var/lib/apt/lists/* && \
+#    rm -rf /var/lib/apt/lists/* && \
     rm -rf cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     rm -rf lib*
 
 COPY bazel-0.24.1-installer-linux-x86_64.sh /
 
-RUN apt-get install -y update && \
-    apt-get install -y curl && \
+RUN apt-get install -y curl && \
     chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \
     ./bazel-0.24.1-installer-linux-x86_64.sh --user && \
     git clone https://github.com/tensorflow/tensorflow.git && \
