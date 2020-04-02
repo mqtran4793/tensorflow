@@ -69,7 +69,7 @@ RUN mkdir tensorflow_lib && \
     mkdir tensorflow_lib/tensorflow/
 
 RUN apt-get update -y && \
-    apt-get install -y wget dirmngr && \
+    apt-get install -y build-essential wget dirmngr && \
     wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub && \
     wget https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb && \
