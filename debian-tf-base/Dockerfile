@@ -77,7 +77,7 @@ RUN apt-get update -y && \
     wget https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libnvinfer6_6.0.1-1+cuda10.0_amd64.deb && \
 	wget https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libnvinfer-dev_6.0.1-1+cuda10.0_amd64.deb && \
 	wget https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libnvinfer-plugin6_6.0.1-1+cuda10.0_amd64.deb && \
-    apt-get purge -y wget dirmngr && \
+    apt-get purge -y wget dirmngr build-essential && \
     rm -rf /var/lib/apt/lists/* && \
     dpkg -i cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     apt-get update -y && \
