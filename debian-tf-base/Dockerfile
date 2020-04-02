@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM debian:stretch-slim as builder
 
 RUN mkdir tensorflow_build
 
@@ -46,7 +46,7 @@ WORKDIR /tensorflow_build/tensorflow
 
 RUN git checkout r1.14
 
-COPY .tf_configure.bazelrc /tensorflow
+COPY .tf_configure.bazelrc /tensorflow_build/tensorflow
 
 RUN apt-get install -y curl wget && \
     rm -rf tensorflow/contrib/makefile/downloads && \
@@ -56,8 +56,23 @@ RUN apt-get install -y curl wget && \
     export HOST_NSYNC_LIB TARGET_NSYNC_LIB && \
     ./tensorflow/contrib/makefile/compile_linux_protobuf.sh && \
     apt-get purge -y curl wget && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    export PATH="$PATH:$HOME/bin" && \
+    bazel build --config=opt --config=cuda --config=monolithic --jobs=6 --local_resources=8192,6,1.0 --verbose_failures //tensorflow:libtensorflow_cc.so
 
+FROM debian:stretch-slim
+
+WORKDIR /
+
+RUN mkdir tensorflow_lib && \
+    mkdir tensorflow_lib/tensorflow/
+
+COPY --from=builder tensorflow/cc /tensorflow_lib/cc
+COPY --from=builder tensorflow/core /tensorflow_lib/core
+COPY --from=builder bazel-genfiles /tensorflow_lib/bazel-genfiles
+COPY --from=builder third_party /tensorflow_lib/third_party
+COPY --from=builder tensorflow/contrib/makefile/download /tensorflow_lib/download
+COPY --from=builder bazel-bin/tensorflow/libtensorflow* /tensorflow_lib
 #COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
 
 #RUN chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \
