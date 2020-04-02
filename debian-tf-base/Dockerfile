@@ -40,8 +40,8 @@ COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
 RUN chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \    
     ./bazel-0.24.1-installer-linux-x86_64.sh --user && \
     git clone https://github.com/tensorflow/tensorflow.git && \
-    rm -rf bazel-0.24.1-installer-linux-x86_64.sh && \
-
+    rm -rf bazel-0.24.1-installer-linux-x86_64.sh
+    
 WORKDIR /tensorflow_build/tensorflow
 
 RUN git checkout r1.14
