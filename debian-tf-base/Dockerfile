@@ -58,7 +58,8 @@ RUN apt-get install -y curl wget && \
     apt-get purge -y curl wget && \
     rm -rf /var/lib/apt/lists/* && \
     export PATH="$PATH:$HOME/bin" && \
-    bazel build --config=opt --config=cuda --config=monolithic --jobs=6 --local_resources=8192,6,1.0 --verbose_failures //tensorflow:libtensorflow_cc.so
+    #bazel build --config=opt --config=cuda --config=monolithic --jobs=6 --local_resources=8192,6,1.0 --verbose_failures //tensorflow:libtensorflow_cc.so
+    bazel build --config=opt --config=cuda --config=monolithic --verbose_failures=1 //tensorflow:libtensorflow_cc.so
 
 FROM debian:stretch-slim
 
