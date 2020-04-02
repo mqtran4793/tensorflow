@@ -67,8 +67,8 @@ WORKDIR /
 
 RUN mkdir tensorflow_lib && \
     mkdir tensorflow_lib/tensorflow/
-RUN pwd
-COPY --from=builder tensorflow/cc /tensorflow_lib/cc
+
+COPY --from=builder tensorflow_build/tensorflow/tensorflow/cc /tensorflow_lib/cc
 COPY --from=builder tensorflow/core /tensorflow_lib/core
 COPY --from=builder bazel-genfiles /tensorflow_lib/bazel-genfiles
 COPY --from=builder third_party /tensorflow_lib/third_party
