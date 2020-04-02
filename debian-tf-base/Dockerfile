@@ -43,8 +43,22 @@ RUN apt-get install -y curl && \
     ./bazel-0.24.1-installer-linux-x86_64.sh --user && \
     git clone https://github.com/tensorflow/tensorflow.git && \
     apt-get purge -y curl && \
-    rm -rf bazel-0.24.1-installer-linux-x86_64.sh
+    rm -rf bazel-0.24.1-installer-linux-x86_64.sh && \
+    rm -rf /var/lib/apt/lists/*
 
+WORKDIR /tensorflow
+
+RUN git checkout r1.14
+
+COPY .tf_configure.bazelrc /tensorflow
+
+RUN rm -rf tensorflow/contrib/makefile/downloads && \
+    ./tensorflow/contrib/makefile/download_dependencies.sh && \
+    HOST_NSYNC_LIB=`tensorflow/contrib/makefile/compile_nsync.sh` && \
+    TARGET_NSYNC_LIB="$HOST_NSYNC_LIB" && \
+    export HOST_NSYNC_LIB TARGET_NSYNC_LIB && \
+    ./tensorflow/contrib/makefile/compile_linux_protobuf.sh
+    
 #COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
 
 #RUN chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \
