@@ -58,7 +58,6 @@ RUN apt-get install -y curl wget && \
     apt-get purge -y curl wget && \
     rm -rf /var/lib/apt/lists/* && \
     export PATH="$PATH:$HOME/bin" && \
-    #bazel build --config=opt --config=cuda --config=monolithic --jobs=6 --local_resources=8192,6,1.0 --verbose_failures //tensorflow:libtensorflow_cc.so
     bazel build --config=opt --config=cuda --config=monolithic --verbose_failures=1 //tensorflow:libtensorflow_cc.so
 
 FROM debian:stretch-slim
@@ -89,9 +88,11 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     dpkg -i libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer6_6.0.1-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer-dev_6.0.1-1+cuda10.0_amd64.deb && \
-    dpkg -i libnvinfer-plugin6_6.0.1-1+cuda10.0_amd64.deb && \
-    rm -rf cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
-    rm -rf lib* && \
+    dpkg -i libnvinfer-plugin6_6.0.1-1+cuda10.0_amd64.deb
+
+WORKDIR /
+
+RUN rm -rf /tensorflow_build && \
     echo 'export PATH=/usr/local/cuda-10.0/bin:/usr/local/cuda-10.0/NsightCompute-1.0${PATH:+:${PATH}}' >> ~/.bashrc && \
     echo 'export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.bashrc
 
