@@ -105,7 +105,6 @@ COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorfl
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1 /tensorflow_lib
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1 /tensorflow_lib
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1-2.params /tensorflow_lib
-COPY --from=builder tensorflow_build/tensorflow/tensorflow/examples/label_image /label_image
 
 #COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
 
