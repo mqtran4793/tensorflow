@@ -65,8 +65,8 @@ FROM debian:stretch-slim
 
 WORKDIR /
 
-RUN mdir /usr/local/include/tf && \
-    mdkir /usr/local/include/tf/tensorflow
+RUN mkdir /usr/local/include/tf && \
+    mkdir /usr/local/include/tf/tensorflow
 
 WORKDIR /tensorflow_build
 
