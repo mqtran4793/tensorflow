@@ -26,7 +26,7 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     rm -rf /var/lib/apt/lists/* && \
     dpkg -i cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     apt-get update -y && \
-    apt-get install -y cuda-toolkit-10-0 && \
+    apt-get install -y cuda-10-0 && \
     dpkg -i libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb && \
     dpkg -i libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer6_6.0.1-1+cuda10.0_amd64.deb && \
@@ -65,9 +65,9 @@ FROM debian:stretch-slim
 
 WORKDIR /
 
-RUN mkdir tensorflow_lib && \
-    mkdir tensorflow_lib/tensorflow/
-    
+RUN mkdir /usr/local/include/tf && \
+    mdkir /usr/local/include/tf/tensorflow
+
 WORKDIR /tensorflow_build
 
 RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
@@ -84,25 +84,28 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     rm -rf /var/lib/apt/lists/* && \
     dpkg -i cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     apt-get update -y && \
-    apt-get install -y cuda-toolkit-10-0 && \
+    apt-get install -y cuda-10-0 && \
     dpkg -i libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb && \
     dpkg -i libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer6_6.0.1-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer-dev_6.0.1-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer-plugin6_6.0.1-1+cuda10.0_amd64.deb && \
     rm -rf cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
-    rm -rf lib*
+    rm -rf lib* && \
+    echo 'export PATH=/usr/local/cuda-10.0/bin:/usr/local/cuda-10.0/NsightCompute-1.0${PATH:+:${PATH}}' >> ~/.bashrc && \
+    echo 'export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.bashrc
 
-COPY --from=builder tensorflow_build/tensorflow/tensorflow/cc /tensorflow_lib/tensorflow/cc
-COPY --from=builder tensorflow_build/tensorflow/tensorflow/core /tensorflow_lib/tensorflow/core
-COPY --from=builder tensorflow_build/tensorflow/bazel-genfiles /tensorflow_lib/bazel-genfiles
-COPY --from=builder tensorflow_build/tensorflow/third_party /tensorflow_lib/third_party
-COPY --from=builder tensorflow_build/tensorflow/tensorflow/contrib/makefile/downloads /tensorflow_lib/downloads
+COPY label_image /label_image
+COPY --from=builder tensorflow_build/tensorflow/tensorflow/cc /usr/local/include/tf/tensorflow/cc
+COPY --from=builder tensorflow_build/tensorflow/tensorflow/core /usr/local/include/tf/tensorflow/core
+COPY --from=builder tensorflow_build/tensorflow/bazel-genfiles /usr/local/include/tf/bazel-genfiles
+COPY --from=builder tensorflow_build/tensorflow/third_party /usr/local/include/tf/third_party
+COPY --from=builder tensorflow_build/tensorflow/tensorflow/contrib/makefile/downloads /usr/local/include
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so /tensorflow_lib
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1 /tensorflow_lib
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1 /tensorflow_lib
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1-2.params /tensorflow_lib
-COPY --from=builder tensorflow_build/tensorflow/tensorflow/examples/label_image /tensorflow_lib/label_image
+COPY --from=builder tensorflow_build/tensorflow/tensorflow/examples/label_image /label_image
 
 #COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
 
