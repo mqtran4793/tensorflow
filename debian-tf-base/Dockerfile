@@ -101,10 +101,10 @@ COPY --from=builder tensorflow_build/tensorflow/tensorflow/core /usr/local/inclu
 COPY --from=builder tensorflow_build/tensorflow/bazel-genfiles /usr/local/include/tf/bazel-genfiles
 COPY --from=builder tensorflow_build/tensorflow/third_party /usr/local/include/tf/third_party
 COPY --from=builder tensorflow_build/tensorflow/tensorflow/contrib/makefile/downloads /usr/local/include
-COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so /tensorflow_lib
-COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1 /tensorflow_lib
-COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1 /tensorflow_lib
-COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1-2.params /tensorflow_lib
+COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so /usr/local/lib
+COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1 /usr/local/lib
+COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1 /usr/local/lib
+COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1-2.params /usr/local/lib
 
 #COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
 
