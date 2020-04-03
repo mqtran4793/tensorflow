@@ -71,7 +71,7 @@ WORKDIR /tensorflow_build
 
 RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     apt-get update -y && \
-    apt-get install -y  --no-install-recommends wget dirmngr && \
+    apt-get install -y wget dirmngr && \
     wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub && \
     wget https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64/libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb && \
