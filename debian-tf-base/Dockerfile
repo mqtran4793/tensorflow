@@ -26,7 +26,7 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     rm -rf /var/lib/apt/lists/* && \
     dpkg -i cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     apt-get update -y && \
-    apt-get install -y cuda-10-0 && \
+    apt-get install -y cuda-10-0 cuda-runtime-10-0 && \
     dpkg -i libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb && \
     dpkg -i libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer6_6.0.1-1+cuda10.0_amd64.deb && \
@@ -84,7 +84,7 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     rm -rf /var/lib/apt/lists/* && \
     dpkg -i cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     apt-get update -y && \
-    apt-get install -y cuda-10-0 && \
+    apt-get install -y cuda-10-0 cuda-runtime-10-0 && \
     dpkg -i libcudnn7_7.4.2.24-1+cuda10.0_amd64.deb && \
     dpkg -i libcudnn7-dev_7.4.2.24-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer6_6.0.1-1+cuda10.0_amd64.deb && \
