@@ -9,7 +9,7 @@ pipeline {
    stages {
       stage('Build debian-tf-base') {
          steps {
-            sh './build.sh debian-tf-base 0.6 ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
+            sh './build.sh debian-tf-base 0.7 ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
          }
       }
       // stage('Build debian-tf-build') {
