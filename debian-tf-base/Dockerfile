@@ -108,33 +108,3 @@ COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorfl
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1 /usr/local/lib
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1 /usr/local/lib
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1-2.params /usr/local/lib
-
-#COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
-
-#RUN chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \
-#    ./bazel-0.24.1-installer-linux-x86_64.sh --user
-
-#RUN git clone https://github.com/tensorflow/tensorflow.git
-
-#WORKDIR /tensorflow_build/tensorflow
-
-#RUN git checkout r1.14
-
-#COPY .tf_configure.bazelrc /tensorflow_build/tensorflow
-
-#RUN rm -rf tensorflow/contrib/makefile/downloads && \
-#    ./tensorflow/contrib/makefile/download_dependencies.sh
-
-#RUN HOST_NSYNC_LIB=`tensorflow/contrib/makefile/compile_nsync.sh` && \
-#    TARGET_NSYNC_LIB="$HOST_NSYNC_LIB" && \
-#    export HOST_NSYNC_LIB TARGET_NSYNC_LIB
-
-#RUN ./tensorflow/contrib/makefile/compile_linux_protobuf.sh
-
-#WORKDIR /
-
-#RUN rm -rf /var/lib/apt/lists/* && \
-#    rm -rf /tensorflow_build/cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
-#    rm -rf /tensorflow_build/lib* && \
-#    rm -rf /tensorflow_build/bazel-0.24.1-installer-linux-x86_64.sh && \
-#    apt-get purge -y wget
