@@ -1,17 +1,14 @@
 FROM debian:stretch-slim as builder
 
-RUN mkdir tensorflow_build
-
 WORKDIR /tensorflow_build
 
-ENV DEBIAN_FRONTEND noninteractive
+COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
 
 RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     apt-get update -y && \
     apt-get install -y build-essential dirmngr \
     git gcc g++ autoconf autogen automake libtool \
-    mlocate cmake make zip unzip \
-    python3 python3-dev && \
+    mlocate cmake make unzip python3 && \
     updatedb && \
     ln -s /usr/bin/python3.5 /usr/bin/python && \
     apt-get install -y wget && \
@@ -33,22 +30,18 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     dpkg -i libnvinfer-dev_6.0.1-1+cuda10.0_amd64.deb && \
     dpkg -i libnvinfer-plugin6_6.0.1-1+cuda10.0_amd64.deb && \
     rm -rf cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
-    rm -rf lib*
-
-COPY bazel-0.24.1-installer-linux-x86_64.sh /tensorflow_build
-
-RUN chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \    
+    rm -rf lib* && \
+    chmod +x bazel-0.24.1-installer-linux-x86_64.sh && \    
     ./bazel-0.24.1-installer-linux-x86_64.sh --user && \
     git clone https://github.com/tensorflow/tensorflow.git && \
     rm -rf bazel-0.24.1-installer-linux-x86_64.sh
     
 WORKDIR /tensorflow_build/tensorflow
 
-RUN git checkout r1.14
-
 COPY .tf_configure.bazelrc /tensorflow_build/tensorflow
 
-RUN apt-get install -y curl wget && \
+RUN git checkout r1.14 && \
+    apt-get install -y curl wget && \
     rm -rf tensorflow/contrib/makefile/downloads && \
     ./tensorflow/contrib/makefile/download_dependencies.sh && \
     HOST_NSYNC_LIB=`tensorflow/contrib/makefile/compile_nsync.sh` && \
