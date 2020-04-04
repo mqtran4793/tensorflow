@@ -1,5 +1,5 @@
 pipeline {
-   agent none
+   agent any
 
    environment {
       REGISTRY="mqtran4793"
@@ -8,7 +8,6 @@ pipeline {
 
    stages {
       stage('Build debian-tensorflow') {
-         agent { label 'docker' }
          steps {
             sh './build.sh debian-tensorflow 1.0 ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
          }
