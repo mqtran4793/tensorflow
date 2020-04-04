@@ -84,8 +84,6 @@ RUN for i in $(seq 1 8); do mkdir -p "/usr/share/man/man${i}"; done && \
     dpkg -i libnvinfer-plugin6_6.0.1-1+cuda10.0_amd64.deb && \
     rm -rf cuda-repo-ubuntu1604_10.0.130-1_amd64.deb && \
     rm -rf lib* && \
-    apt-get autoremove -y && \
-    apt-get autoclean -y && \
     echo 'export PATH=/usr/local/cuda-10.0/bin:/usr/local/cuda-10.0/NsightCompute-1.0${PATH:+:${PATH}}' >> ~/.bashrc && \
     echo 'export LD_LIBRARY_PATH=/usr/local/cuda-10.0/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}' >> ~/.bashrc
 
