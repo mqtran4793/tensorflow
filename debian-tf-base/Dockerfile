@@ -108,3 +108,5 @@ COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorfl
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1 /usr/local/lib
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1 /usr/local/lib
 COPY --from=builder tensorflow_build/tensorflow/bazel-bin/tensorflow/libtensorflow_cc.so.1.14.1-2.params /usr/local/lib
+
+WORKDIR /test
