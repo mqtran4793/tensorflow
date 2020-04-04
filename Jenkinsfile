@@ -2,7 +2,7 @@ pipeline {
    agent any
 
    environment {
-      REGISTRY="mqtran4793"
+      REGISTRY="chadwpalm"
       REGISTRY_CREDS = credentials('dockerhub')
    }
 
