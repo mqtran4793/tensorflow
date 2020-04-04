@@ -1,5 +1,5 @@
 pipeline {
-   agent any
+   agent none
 
    environment {
       REGISTRY="mqtran4793"
@@ -7,14 +7,10 @@ pipeline {
    }
 
    stages {
-      stage('Build debian-tf-base') {
+      stage('Build debian-tensorflow') {
+         agent { label 'docker' }
          steps {
-            sh './build.sh debian-tf-base triming ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
-         }
-      }
-      stage('Build debian-tf-build') {
-         steps {
-            sh './build.sh debian-tf-build trimming ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
+            sh './build.sh debian-tensorflow 1.0 ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
          }
       }
    }
