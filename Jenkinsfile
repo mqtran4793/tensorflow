@@ -3,7 +3,7 @@ pipeline {
 
    environment {
       REGISTRY="chadwpalm"
-      REGISTRY_CREDS = credentials('dockerhub')
+      REGISTRY_CREDS = credentials('Chad-Dockerhub')
    }
 
    stages {
