@@ -9,7 +9,7 @@ pipeline {
    stages {
       stage('Build debian-tensorflow') {
          steps {
-            sh './build.sh debian-tensorflow 1.0 ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
+            sh './build.sh debian-tensorflow TEST ${REGISTRY} ${REGISTRY_CREDS_USR} ${REGISTRY_CREDS_PSW}'
          }
       }
    }

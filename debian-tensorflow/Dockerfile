@@ -1,5 +1,6 @@
 FROM debian:stretch-slim
 ADD label_image /
+RUN ls
 # FROM debian:stretch-slim as builder
 
 # WORKDIR /tensorflow_build
